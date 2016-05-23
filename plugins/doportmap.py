@@ -30,7 +30,7 @@ def do_portmap_scan(ip, taskid=None):
     nm.scan(ip, arguments='-p 80 -O -sV --script=banner')
     host_struct.is_up = 'up' if ip in nm.all_hosts() else 'down'
 
-    backend_test = DatabaseFactory.create(plugin_name='backend_test', url='mysql+mysqldb://celery:celery1@127.0.0.1/wscan')
+    backend_service = DatabaseFactory.create(plugin_name='backend_service', url='mysql+mysqldb://celery:celery1@127.0.0.1/wscan')
     backend_host = DatabaseFactory.create(plugin_name='backend_host', url='mysql+mysqldb://celery:celery1@127.0.0.1/wscan')
     for host in nm.all_hosts():
         host_struct.address = host
@@ -53,7 +53,7 @@ def do_portmap_scan(ip, taskid=None):
                 if nm[host][protocol][port].has_key('script'):
                     service_struct.scripts_results = ','.join([y for x,y in nm[host][protocol][port]['script'].items()])
 
-            backend_test.insert(service_struct)
+            backend_service.insert(service_struct)
             print service_struct
     backend_host.insert(host_struct)
 
