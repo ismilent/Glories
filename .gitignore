@@ -1,0 +1,9 @@
+.idea/
+.DS_Store
+*.py[cod]
+output/
+.sqlmap_history
+traffic.txt
+py3_env/
+*~
+*.rdb
