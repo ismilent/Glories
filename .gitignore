@@ -7,3 +7,4 @@ traffic.txt
 py3_env/
 *~
 *.rdb
+.vscode/

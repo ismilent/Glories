@@ -2,12 +2,15 @@
 #coding:utf-8
 
 from flask import Flask
+from flask import url_for
 
 
 app = Flask('__app__')
 
 @app.route('/')
 def index():
+    print url_for('index')
+    app.logger.debug('Helle World')
     return 'BobScan'
 
 if __name__ == '__main__':
