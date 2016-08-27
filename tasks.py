@@ -6,6 +6,7 @@ import uuid
 import subprocess
 
 from celery import Celery, platforms
+from celery import uuid
 from libs.config.config import SCRIPT_PLUGIN_PATH
 from libs.config.config import CELERY_CONF
 from plugins.doportmap import do_portmap_scan
@@ -36,3 +37,7 @@ def nmap_dispath(targets, taskid=None):
 @celery_app.task
 def nmap_dispath(target, taskid=None):
     return do_portmap_scan(target,taskid)
+
+@celery_app.task
+def test():
+    pass

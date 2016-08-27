@@ -12,6 +12,7 @@ CELERY_CONF = {'CELERY_IMPORTS': ("tasks",),
                'CELERY_TIMEZONE': 'Asia/Shanghai',
                'CELERY_ENABLE_UTC': True,
                'CELERY_REDIS_MAX_CONNECTIONS': 5000,  # Redis 最大连接数
+               'CELERYD_POOL_RESTARTS': True,
                'BROKER_TRANSPORT_OPTIONS': {'visibility_timeout': 3600}}
 
 PORTMAP_CONF = {'DB_CONN': 'mysql+mysqldb://celery:celery1@127.0.0.1/wscan',

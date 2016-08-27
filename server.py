@@ -40,6 +40,10 @@ def create_portmap_tasks():
 
     return jsonify({'task': task})
 
+@flask_app.route('/portmap/api/v1.0/stop/<string:task_id>', methods=['GET'])
+def exit_portmap(task_id):
+    pass
+
 @flask_app.errorhandler(400)
 def handler_400(error):
     return make_response(jsonify({'error': 'Code 400'}))
