@@ -1,6 +1,12 @@
-celery==3.1.19
-flower==0.8.3
-SQLAlchemy==1.0.11
-redis==2.10.5
+celery
+flower
+SQLAlchemy
+redis
 MySQL-python
 Flask
+Flask-WTF
+Flask-SQLAlchemy
+Flask-Login
+Flask-Bcrypt
+Flask-Cache
+Flask-DebugToolbar
