@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js fixed-layout">
+
 <head>
     {% block head %}
     <meta charset="utf-8">
@@ -15,29 +16,24 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/amazeui.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='i/favicon.png') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
-    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" /> {% endblock %}
 </head>
+
 <body>
-<header class="am-topbar am-topbar-inverse admin-header">
-  <div class="am-topbar-brand">
-    <strong>Glories</strong> <small>后台管理</small>
-  </div>
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <strong>Glories</strong> <small>后台管理</small>
+        </div>
 
-  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
-  {% block header %}
-
-  {% endblock %}
-</header>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>        {% block header %} {% endblock %}
+    </header>
     <div class="am-cf admin-main">
-        {% block sidebar %}
-        {% endblock %}
-        {% block content%}
-        {% endblock %}
+        {% block sidebar %} {% endblock %} {% block content%} {% endblock %}
     </div>
 </body>
 <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 <!--<![endif]-->
 <script src="{{ url_for('static', filename='js/amazeui.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
 </html>

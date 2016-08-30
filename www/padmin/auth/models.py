@@ -1,5 +1,4 @@
-from web import db
-from padmin.extension import db
+from padmin.extensions import db
 
 class Base(db.Model):
     __abstract__ = True
@@ -10,7 +9,7 @@ class Base(db.Model):
                                 onupdate=db.func.current_timestamp())
     
 
-class User(Base):
+class Users(Base):
     __tablename__ = 'auth_user'
 
     username = db.Column(db.String(80), nullable=False)
@@ -19,10 +18,26 @@ class User(Base):
     role = db.Column(db.SmallInteger, nullable=False)
     status = db.Column(db.SmallInteger, nullable=False)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, role=1, ):
         self.username = username
         self.email = email
         self.password = password
     
     def __repr__(self):
         return '<User %r>' % (self.username)
+    
+    #flask-login
+    def get_id(self):
+        return self.id
+
+    def is_authenticated(self):
+        if self.role == 1:
+            return True
+        else:
+            return False
+    
+    def is_active(self):
+        return True
+    
+    def is_anonymous(self):
+        return False

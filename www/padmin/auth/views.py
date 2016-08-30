@@ -2,10 +2,8 @@ from flask import Blueprint, request, render_template, \
                 flash, g, session, redirect, url_for
 from werkzeug import check_password_hash, generate_password_hash
 
-from app import db
-from app import app
-from app.auth.forms import LoginForm
-from app.auth.models import User
+from padmin.auth.forms import LoginForm
+from padmin.auth.models import Users
 
 mod_admin = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -20,7 +18,7 @@ def signin():
         return redirect(url_for('auth.home'))
 
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Users.query.filter_by(email=form.email.data).first()
         if user and check_password_hash(user.password, form.password.data):
             session['user_id'] = user.id
             session['isLogin'] = True
