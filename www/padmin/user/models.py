@@ -1,4 +1,5 @@
 from padmin.extensions import db
+from padmin.extensions import bcrypt
 
 class Base(db.Model):
     __abstract__ = True

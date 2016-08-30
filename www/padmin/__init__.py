@@ -1,10 +1,9 @@
 from flask import Flask, render_template
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from config import DevConfig
-from padmin.extensions import db
-from padmin import auth
+from padmin.extensions import db, login_manager, bcrypt
+from padmin import auth, user
 
+#create flask app
 def create_app(config_object=DevConfig):
     app = Flask(__name__)
     app.config.from_object(config_object)
@@ -12,12 +11,22 @@ def create_app(config_object=DevConfig):
     register_blueprint(app)
     return app
 
+#Register extensions
 def register_extensions(app):
     db.init_app(app)
+    '''
+    with app.test_request_context():
+        db.create_all()
+    '''
+    db.app = app # if you wanna auto create table, you must db.app = app
+    db.create_all()
+    bcrypt.init_app(app)
     return None
 
+#register blueprint
 def register_blueprint(app):
-    app.register_blueprint(auth.views.mod_admin)
+    app.register_blueprint(auth.views.auth_print)
+    app.register_blueprint(user.views.user_print)
 
 def register_errorhandlers(app):
     def render_error(error):
