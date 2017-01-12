@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-from libs.nmap import PortScanner
 from pprint import pprint
+
+from thirdparty.nmap import PortScanner
+
 nm = PortScanner()
 pprint (nm.analyse_nmap_xml_scan('<?xml version="1.0" encoding="UTF-8"?>\
 <!DOCTYPE nmaprun>\

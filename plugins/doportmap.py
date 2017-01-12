@@ -14,18 +14,13 @@ db_instance = DatabaseFactory.create(plugin_name='backend_test', url='mysql+mysq
 db_instance.insert('xxx')
 '''
 
-
-import time
-from libs.datastruct import NmapServiceStruct
-from libs.datastruct import NmapHostStruct
 from libs.database import DatabaseFactory
-from libs.nmap import PortScanner
-from config import PORTMAP_CONF
-from celery import current_task
-import json
-
 from libs.datastruct import NmapHost, NmapPort
-from ipaddr import IPNetwork
+from libs.datastruct import NmapHostStruct
+from libs.datastruct import NmapServiceStruct
+from thirdparty.ipaddr import IPNetwork
+from thirdparty.nmap import PortScanner
+
 
 def do_portmap(target, args=None, taskid=None):
     ip_network = IPNetwork(target)
