@@ -8,6 +8,7 @@ from flask import abort
 from flask import make_response
 from flask import request
 
+import celery
 from tasks import nmap_dispath
 from tasks import celery_app
 
@@ -31,7 +32,8 @@ def create_portmap_tasks():
     if not request.json or not 'target' in request.json:
         abort(400)
     ip = request.json.get('target')
-    celery_task = nmap_dispath.delay(ip,)
+    task_id = celery.uuid()
+    celery_task = nmap_dispath.apply_async((ip,), task_id=task_id)
     task = {
         'task_id': celery_task.task_id,
         'target': ip,

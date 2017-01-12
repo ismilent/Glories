@@ -10,7 +10,7 @@ class Base(db.Model):
                                 onupdate=db.func.current_timestamp())
     
 
-class Users(Base):
+class User(Base):
     __tablename__ = 'user'
 
     username = db.Column(db.String(80), nullable=False)
@@ -22,7 +22,7 @@ class Users(Base):
     def __init__(self, username, email, password, role=2, status=0):
         self.username = username
         self.email = email
-        self.password = password
+        self.password = bcrypt.generate_password_hash(password)
         self.role = role
         self.status = status
     
@@ -38,10 +38,7 @@ class Users(Base):
         return self.id
 
     def is_authenticated(self):
-        if self.role == 1:
-            return True
-        else:
-            return False
+        return False
     
     def is_active(self):
         return True
