@@ -20,7 +20,7 @@ from libs.datastruct import NmapServiceStruct
 from libs.datastruct import NmapHostStruct
 from libs.database import DatabaseFactory
 from libs.nmap import PortScanner
-from libs.config import PORTMAP_CONF
+from config import PORTMAP_CONF
 from celery import current_task
 import json
 
