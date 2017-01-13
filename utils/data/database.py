@@ -24,7 +24,7 @@ class DatabaseFactory(object):
         :return: backend_plugin instance
         '''
         backend_plugin = None
-        plugin_path = "libs.database.dbplugins.{0}".format(plugin_name)
+        plugin_path = "utils.database.dbplugins.{0}".format(plugin_name)
         __import__(plugin_path)
         plugin_obj = sys.modules[plugin_path]
         plugin_classes = inspect.getmembers(plugin_obj, inspect.isclass)

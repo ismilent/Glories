@@ -5,10 +5,9 @@
 from celery import Celery, platforms
 from celery import uuid
 from config import CELERY_CONF
-from plugins.doportmap import do_portmap_scan
 from plugins.doportmap import do_portmap
 
-from libs.datastruct import HostInfoEncoder
+from utils.data import HostInfoEncoder
 
 import json
 
@@ -24,8 +23,10 @@ celery_app.config_from_object(CELERY_CONF)
 # @app.task(bind=True, default_retry_delay=300, max_retries=5)
 
 @celery_app.task
-def nmap_dispath(target,taskid=None):
-    return do_portmap_scan(target,taskid)
+def nmap_dispath(target,scan_option=None,taskid=None):
+    scan_result = [json.dumps(item, cls=HostInfoEncoder) for item in do_portmap(target, scan_option, taskid)]
+    print scan_result
+    return scan_result
 
 @celery_app.task
 def test(target, single=False):

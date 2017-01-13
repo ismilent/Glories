@@ -1,39 +1,26 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-'''
-from libs.database.backendpluginFactory import BackendPluginFactory
-backend = BackendPluginFactory.create('backend_test', url='mysql+mysqldb://celery:celery1@127.0.0.1/wscan')
-backend.insert()
-'''
+from utils.data import DatabaseFactory
+from utils.data import NmapHost, NmapPort, NmapHostStruct, NmapServiceStruct
 
-'''
-from libs.database.databaseFactory import DatabaseFactory
-
-db_instance = DatabaseFactory.create(plugin_name='backend_test', url='mysql+mysqldb://celery:celery1@127.0.0.1/wscan')
-db_instance.insert('xxx')
-'''
-
-from libs.database import DatabaseFactory
-from libs.datastruct import NmapHost, NmapPort
-from libs.datastruct import NmapHostStruct
-from libs.datastruct import NmapServiceStruct
 from thirdparty.ipaddr import IPNetwork
 from thirdparty.nmap import PortScanner
 
+from celery import current_task
+from config import DB_CONN_STRING, NMAP_SCAN_OPTION
 
-def do_portmap(target, args=None, taskid=None):
+def do_portmap(target, scan_option=None, taskid=None):
     ip_network = IPNetwork(target)
     print ip_network
 
     if not taskid:
-        #taskid = current_task.request.id
-        taskid = 'dda'
-    if not args:
-        args = '-O'
+        taskid = current_task.request.id
+    if not scan_option:
+        scan_option = NMAP_SCAN_OPTION
 
     nm = PortScanner()
-    nm.scan(target, arguments='-sT -p 80')
+    nm.scan(target, arguments=scan_option)
     scan_result = []
     ips = [ip.exploded for ip in ip_network]
     for host in ips:
@@ -66,7 +53,7 @@ def do_portmap(target, args=None, taskid=None):
         scan_result.append(host_info)
     return scan_result
 
-
+'''
 def do_portmap_scan(ip, taskid):
     host_struct = NmapHostStruct()
     host_struct.taskid = taskid
@@ -103,4 +90,5 @@ def do_portmap_scan(ip, taskid):
             print service_struct
     backend_host.insert(host_struct)
 
-    return 'Finished'
+    return 'Finished
+'''

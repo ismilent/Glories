@@ -18,10 +18,8 @@ CELERY_CONF = {
                'BROKER_TRANSPORT_OPTIONS': {'visibility_timeout': 3600}
 }
 
-PORTMAP_CONF = {
-    'DB_CONN': 'mysql+mysqldb://root:toor@127.0.0.1/glories',
-    'SCAN_OPTION': '-sT -P0 -sV -O --script=banner -p T:21-25,80-89,110,143,443,513,873,1080,1433,1521,1158,3306-3308,3389,3690,5900,6379,7001,8000-8090,9000,9418,27017-27019,50060,111,11211,2049'
-}
+DB_CONN_STRING = 'mysql+mysqldb://root:toor@127.0.0.1/glories'
+NMAP_SCAN_OPTION = '-sT -P0 -sV -O --script=banner -p T:21-25,80-89,110,143,443,513,873,1080,1433,1521,1158,3306-3308,3389,3690,5900,6379,7001,8000-8090,9000,9418,27017-27019,50060,111,11211,2049'
 
 
 class Config(object):
@@ -39,7 +37,3 @@ class DevConfig(Config):
     DEBUG = True
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
-
-
-class Password(object):
-    pass
