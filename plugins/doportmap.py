@@ -33,14 +33,8 @@ def do_portmap(target, args=None, taskid=None):
         args = '-O'
 
     nm = PortScanner()
-    nm.scan(target, arguments='-sV -p 80')
-    '''
-    IP: address, domain, is_up, os
-    IPort: address, port, server, state, protocol,
-    '''
+    nm.scan(target, arguments='-sT -p 80')
     scan_result = []
-
-    print nm.all_hosts()
     ips = [ip.exploded for ip in ip_network]
     for host in ips:
         host_info = NmapHost()

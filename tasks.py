@@ -28,5 +28,5 @@ def nmap_dispath(target,taskid=None):
     return do_portmap_scan(target,taskid)
 
 @celery_app.task
-def test(single=False):
-    return [json.dumps(item, cls=HostInfoEncoder) for item in do_portmap('192.168.0.7/30')]
+def test(target, single=False):
+    return [json.dumps(item, cls=HostInfoEncoder) for item in do_portmap(target)]
