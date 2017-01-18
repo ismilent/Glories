@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 #from aaconfig import DevConfig
 from padmin.extensions import db, login_manager, bcrypt
-from padmin import auth, user, home
+from padmin import auth, user, home, tasks
 
 from config import DevConfig
 
@@ -32,6 +32,8 @@ def register_blueprint(app):
     app.register_blueprint(auth.views.auth_print)
     app.register_blueprint(user.views.user_print)
     app.register_blueprint(home.views.home_print)
+    app.register_blueprint(tasks.views.tasks_print)
+
 
 def register_errorhandlers(app):
     def render_error(error):
