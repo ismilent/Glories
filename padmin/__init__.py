@@ -1,17 +1,19 @@
 from flask import Flask, render_template
 #from aaconfig import DevConfig
 from padmin.extensions import db, login_manager, bcrypt
-from padmin import auth, user, home, tasks
-
+from padmin import auth, user, home, task
 from config import DevConfig
+
 
 #create flask app
 def create_app(config_object=DevConfig):
-    app = Flask(__name__)
+    app = Flask(__name__, static_path='/static')
     app.config.from_object(config_object)
     register_extensions(app)
     register_blueprint(app)
     register_errorhandlers(app)
+    app.jinja_env.variable_start_string = '${'
+    app.jinja_env.variable_end_string = '}'
     return app
 
 #Register extensions
@@ -32,7 +34,7 @@ def register_blueprint(app):
     app.register_blueprint(auth.views.auth_print)
     app.register_blueprint(user.views.user_print)
     app.register_blueprint(home.views.home_print)
-    app.register_blueprint(tasks.views.tasks_print)
+    app.register_blueprint(task.views.task_print)
 
 
 def register_errorhandlers(app):

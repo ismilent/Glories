@@ -22,6 +22,8 @@ def index():
 
 @auth_print.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'isLogin' in session and session['isLogin']:
+        return redirect(url_for('home.index'))
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -51,7 +53,7 @@ def register():
 def logout():
     logout_user()
     return 'a'
-
+'''
 @auth_print.route('/test')
 def test():
     user = User('admin', 'a@a.cn', bcrypt.generate_password_hash('123456'))
@@ -64,3 +66,4 @@ def sess():
     if  current_user.is_anonymous:
         current_app.logger.debug('Logo out')
     return 'dsd'
+'''

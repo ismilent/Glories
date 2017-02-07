@@ -1,0 +1,126 @@
+{% extends "base.html" %} 
+{% block title %} 添加任务 {% endblock%}
+
+{% block header %} <!-- header start -->
+${ super() }
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse" xmlns="http://www.w3.org/1999/html">
+
+    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+      <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">0</span></a></li>
+      <li class="am-dropdown" data-am-dropdown>
+        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+        </a>
+        <ul class="am-dropdown-content">
+          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+          <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+          <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+        </ul>
+      </li>
+      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    </ul>
+  </div>
+{% endblock %} <!-- end header -->
+
+{% block sidebar %} <!-- sidebar start -->
+<div id="app-sidebar" class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+        <ul class="am-list admin-sidebar-list ">
+            <li><a href="index"><span class="am-icon-home"></span> 首页</a></li>
+            <li class="admin-parent">
+                <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 任务管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                    <li><a v-on:click="addTask" class="am-cf"><span class="am-icon-plus"></span> 添加任务</a></li>
+                    <li><a ><span class="am-icon-terminal"></span> a</a></li>
+                    <li><a href="admin-gallery.html"><span class="am-icon-th"></span> b <!-- <span class="am-badge am-badge-secondary am-margin-right am-fr">24</span>--></a></li>
+                    <li><a href="admin-log.html"><span class="am-icon-calendar"></span> c</a></li>
+                    <li><a href="admin-404.html"><span class="am-icon-bug"></span> d</a></li>
+                </ul>
+            </li>
+            <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
+            <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
+            <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %} <!-- end sidebar-->
+
+{% block content %} <!-- content start -->
+<div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">任务管理</strong> / <small>添加任务</small></div>
+      </div>
+      <div class="am-g">
+        <div class="am-u-sm-12">
+            <div  class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+                <div id="modal-form" class="am-modal am-modal-no-btn">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">
+                            添加任务
+                        </div>
+                        <form id="app-form" action="" method="POST" class="am-form am-modal-hd">
+                        <br/>
+                        <label class="am-form-label">Target:</label>
+                        <input v-model="target" type="text" name="target" class="am-input-sm" placeholder="支持 192.168.1.0/24">
+                        <br/>
+                        <br />
+                        <label class="am-form-label">Option:</label>
+                        <input v-model="option" type="text" name="option" class="am-input-sm" placeholder="">
+                        <br />
+                        <div class="am-center">
+                            <input type="submit"  v-on:click="addTask" class="am-btn am-btn-primary">
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2014 Glories. All Rights Reserved.</p>
+    </footer>
+  </div>
+{% endblock%} <!-- end content -->
+{% block script %}
+    ${ super() }
+    <script type="text/javascript">
+        var sidebar = new Vue({
+            el: "#app-sidebar",
+            methods: {
+                addTask: function(){
+                    alert('password');
+                    $("#modal-form").modal();
+                }
+            }
+        });
+
+        var app = new Vue({
+            el: "#app-form",
+            data: {
+                target:"",
+                option: "-sT -P0 -sV -O --script=banner -p T:21-25,80-89,110,143,443,513,873,1080,1433,1521,1158,3306-3308,3389,3690,5900,6379,7001,8000-8090,9000,9418,27017-27019,50060,111,11211,2049"
+            },
+            methods: {
+                addTask: function(){
+                    var request = {target: this.target, option: this.option};
+                    $.ajax({
+                        url: "/task/add",
+                        type: "POST",
+                        data: JSON.stringify(request),
+                        contentType:"application/json",
+                        dataType: "json",
+                        success: function(data, status, xhr){
+                            alert('Ajax succrss');
+                        },
+                        Error: function(xhr, error, exception){
+                            alert(exception.toString());
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+{% endblock %}

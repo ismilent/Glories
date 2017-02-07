@@ -11,12 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='i/favicon.png') }}">
-    <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='i/app-icon72x72@2x.png') }}">
+    <link rel="icon" type="image/png" href="/static/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/amazeui.min.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='i/favicon.png') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" /> {% endblock %}
+    <link rel="stylesheet" href="/static/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/i/favicon.png" />
+    <link rel="stylesheet" href="/static/css/admin.css" />
+    {% endblock %}
 </head>
 
 <body>
@@ -25,15 +26,18 @@
             <strong>Glories</strong> <small>后台管理</small>
         </div>
 
-        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>        {% block header %} {% endblock %}
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button> {% block header %} {% endblock %}
     </header>
     <div class="am-cf admin-main">
         {% block sidebar %} {% endblock %} {% block content%} {% endblock %}
     </div>
 </body>
-<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-<!--<![endif]-->
-<script src="{{ url_for('static', filename='js/amazeui.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
+<!-- script start -->
+{% block script %}
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/amazeui.js"></script>
+    <script src="/static/js/vue.js"></script>
+{% endblock %}
+<!-- end script -->
 </html>

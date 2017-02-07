@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% block title %} Index {% endblock%} 
 {% block header %}
-{{ super() }}
+${ super() }
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
@@ -28,7 +28,7 @@
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 任务管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                    <li><a href="admin-user.html" class="am-cf"><span class="am-icon-plus"></span> 添加任务<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                    <li><a href="/task/task-add.html" class="am-cf"><span class="am-icon-plus"></span> 添加任务<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                     <li><a href="admin-help.html"><span class="am-icon-terminal"></span> a</a></li>
                     <li><a href="admin-gallery.html"><span class="am-icon-th"></span> b <!-- <span class="am-badge am-badge-secondary am-margin-right am-fr">24</span>--></a></li>
                     <li><a href="admin-log.html"><span class="am-icon-calendar"></span> c</a></li>
@@ -66,7 +66,7 @@
             </thead>
             <tbody>
             {% for task in tasks %}
-            <tr><td>{{ task['task_id'] }}</td><td>{{ task['task'] }}</td><td><a href="#">{{ task['worker'] }}</a></td> <td><span class="am-badge am-badge-success">{{ task['status'] }}</span></td>
+            <tr><td>${ task['task_id'] }</td><td>${ task['task'] }</td><td><a href="#">${ task['worker'] }</a></td> <td><span class="am-badge am-badge-success">${ task['status'] }</span></td>
               <td>
                 <div class="am-dropdown" data-am-dropdown>
                   <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
@@ -235,7 +235,6 @@
         </div>
       </div>
     </div>
-
           <footer class="admin-content-footer">
       <hr>
       <p class="am-padding-left">© 2014 Glories. All Rights Reserved.</p>

@@ -1,5 +1,6 @@
 from padmin.extensions import db
 from padmin.extensions import bcrypt
+from flask_login import UserMixin
 
 class Base(db.Model):
     __abstract__ = True

@@ -11,4 +11,4 @@ def index():
     tasks = []
     for x in range(1,5,1):
         tasks.append({'task_id': x, 'task': 'task' + str(x), 'worker': 'sada', 'status': 'up'})
-    return render_template('home/dashboard.html', tasks=tasks)
+    return render_template('home/index.html', tasks=tasks)

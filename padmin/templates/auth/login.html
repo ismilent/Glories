@@ -8,8 +8,8 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <link rel="alternate icon" type="image/png" href="{{ url_for('static', filename='i/favicon.png') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/amazeui.min.css')}}"/>
+  <link rel="alternate icon" type="image/png" href="${ url_for('static', filename='i/favicon.png') }">
+  <link rel="stylesheet" href="${ url_for('static', filename='css/amazeui.min.css')}"/>
   <style>
     .header {
       text-align: center;
@@ -46,12 +46,12 @@
     <br>
     -->
     <form method="post" class="am-form" action="">
-      {{ form.csrf_token }}
-      {{ form.email.label() }}
-      {{ form.email(placeholder="Email", id="email")}}
+      ${ form.csrf_token }
+      ${ form.email.label() }
+      ${ form.email(placeholder="Email", id="email")}
       <br>
-      {{ form.password.label() }}
-      {{ form.password(placeholder="Password", id="email")}}
+      ${ form.password.label() }
+      ${ form.password(placeholder="Password", id="email")}
       <br>
       <label for="remember-me">
         <input id="remember-me" type="checkbox">
@@ -65,9 +65,9 @@
       {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
       {% for category, message in messages %}
-      <div class="am-alert am-alert-{{category}}">
+      <div class="am-alert am-alert-${category}">
         <a class="am-close" title="Close" href="#" data-dismiss="alert"></a>
-        {{message}}
+        ${message}
       </div>
       {% endfor %}
       {% endif %}
