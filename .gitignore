@@ -8,3 +8,4 @@ py3_env/
 *~
 *.rdb
 .vscode/
+tags
