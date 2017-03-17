@@ -16,3 +16,4 @@ services/sqlmap/lib/utils/__pycache__/
 thirdparty/__pycache__/
 thirdparty/libnmap/
 utils/__pycache__/
+.gitignore

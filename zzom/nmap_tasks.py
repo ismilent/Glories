@@ -10,7 +10,7 @@ from .celery import  celery_app
 from utils.data import NmapHost
 from utils.data import HostInfoEncoder
 
-from plugins.doportmap import do_portmap
+from plugins.nmap import do_portmap
 
 @celery_app.task
 def nmap_dispath(target,scan_option=None,taskid=None):

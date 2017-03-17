@@ -55,6 +55,51 @@ def do_portmap(target, scan_option=None, taskid=None):
         scan_result.append(host_info)
     return scan_result
 
+def scan_sigle_ip(target, scan_option=None, taskid=None):
+    ip_network = IPNetwork(target)
+    print ip_network
+
+    if not taskid:
+        taskid = current_task.request.id
+    if not scan_option:
+        scan_option = NMAP_SCAN_OPTION
+
+    nm = PortScanner()
+    print target
+    nm.scan(target, arguments=scan_option)
+    # nm.scan('127.0.0.1', arguments=scan_option)
+    scan_result = []
+    ips = [ip.exploded for ip in ip_network]
+    for host in ips:
+        host_info = NmapHost()
+        host_info.taskid = taskid
+        host_info.ipaddress = host
+        if host not in nm.all_hosts():
+            host_info.state = 'down'
+            scan_result.append(host_info)
+            continue
+        host_info.domain = nm[host].hostname()
+        host_info.state= nm[host].state()
+        host_info.os_info = nm[host]['osmatch'][0]['name'] if nm[host].has_key('osmatch') else None
+        for protocol in nm[host].all_protocols():
+            for port in nm[host][protocol].keys():
+                port_info = NmapPort()
+                port_info.port = port
+                port_info.service = nm[host][protocol][port]['name']
+                port_info.state = nm[host][protocol][port]['state']
+                port_info.protocol = protocol
+                port_info.product = nm[host][protocol][port]['product']
+                port_info.product_version = nm[host][protocol][port]['version']
+                port_info.product_extrainfo = nm[host][protocol][port]['extrainfo']
+                if nm[host][protocol][port].has_key('script'):
+                    port_info.scripts_results = ','.join([y for x, y in nm[host][protocol][port]['script'].items()])
+                else:
+                    port_info.script_results = None
+                host_info.port.append(port_info)
+
+        scan_result.append(host_info)
+    return scan_result
+
 '''
 def do_portmap_scan(ip, taskid):
     host_struct = NmapHostStruct()
