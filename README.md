@@ -1,7 +1,7 @@
-##Scaner of Bob
+## Scaner of Bob
 This a distributed network infotmation collection tool base on Celery.
 This a beta version.Now it just can use network host infomation detect base on nmap.
-##Usage
+## Usage
 It require root privlege.
 ```
 sudo celery worker -A tasks --loglevel=info
@@ -16,7 +16,7 @@ python server.py
 ```
 Create task
 ```
-curl -i -H "Content-Type: application/json" -X POST -d '{"target": "127.0.0.1"}' http://127.0.0.1:5000/portmap/api/v1.0/task
+curl -i -H "Content-Type: application/json" -X POST -d '{"target": "127.0.0.1"}' http://127.0.0.1:5000/portmap/api/1.0/task
 HTTP/1.0 200 OK
 Content-Type: application/json
 Content-Length: 125
@@ -33,7 +33,7 @@ Date: Thu, 12 May 2016 08:21:24 GMT
 ```
 Get task status
 ```
-curl -i http://127.0.0.1:5000/portmap/api/v1.0/task/result/83acd56a-ce8d-44e4-91a3-d034ebf3ec6c
+curl -i http://127.0.0.1:5000/portmap/api/1.0/task/result/83acd56a-ce8d-44e4-91a3-d034ebf3ec6c
 HTTP/1.0 200 OK
 Content-Type: application/json
 Content-Length: 99
@@ -47,5 +47,5 @@ Date: Thu, 12 May 2016 08:21:46 GMT
   }
 }
 ```
-##Feature
+## Feature
 Now.提供批量的主机信息探测

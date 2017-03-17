@@ -18,7 +18,7 @@ from zzom.celery import celery_app
 flask_app = Flask(__name__)
 
 
-@flask_app.route('/api/v1.0/task/info/<string:task_id>', methods=['GET'])
+@flask_app.route('/api/1.0/task/info/<string:task_id>', methods=['GET'])
 def get_portmap_tasks(task_id):
 
     rs = celery_app.AsyncResult(task_id)
@@ -28,7 +28,7 @@ def get_portmap_tasks(task_id):
     }
     return jsonify({'tasks': task})
 
-@flask_app.route('/api/v1.0/task/portmap', methods=['POST'])
+@flask_app.route('/api/1.0/task/portmap', methods=['POST'])
 def create_portmap_tasks():
     if not request.json or not 'target' in request.json:
         abort(400)
@@ -43,7 +43,7 @@ def create_portmap_tasks():
 
     return jsonify({'task': task})
 
-@flask_app.route('/api/v1.0/stop/portmap/<string:task_id>', methods=['GET'])
+@flask_app.route('/api/1.0/stop/portmap/<string:task_id>', methods=['GET'])
 def exit_portmap(task_id):
     pass
 

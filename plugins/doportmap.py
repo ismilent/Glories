@@ -21,8 +21,8 @@ def do_portmap(target, scan_option=None, taskid=None):
 
     nm = PortScanner()
     print target
-    # nm.scan(target, arguments=scan_option)
-    nm.scan('127.0.0.1', arguments=scan_option)
+    nm.scan(target, arguments=scan_option)
+    # nm.scan('127.0.0.1', arguments=scan_option)
     scan_result = []
     ips = [ip.exploded for ip in ip_network]
     for host in ips:
