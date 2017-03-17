@@ -5,17 +5,17 @@
 import os
 
 CELERY_CONF = {
-    'CELERY_IMPORTS': ("tasks",),
-               'BROKER_URL': 'redis://127.0.0.1:6379/0',
-               #'CELERY_RESULT_BACKEND': 'db+mysql://root:toor@127.0.0.1:3306/glories',
-               'CELERY_RESULT_BACKEND': 'redis://127.0.0.1:6379/0',
-               'CELERY_TASK_SERIALIZER': 'json',
-               'CELERY_RESULT_SERIALIZER': 'json',
-               'CELERY_TIMEZONE': 'Asia/Shanghai',
-               'CELERY_ENABLE_UTC': True,
-               'CELERY_REDIS_MAX_CONNECTIONS': 5000,  # Redis 最大连接数
-               'CELERYD_POOL_RESTARTS': True,
-               'BROKER_TRANSPORT_OPTIONS': {'visibility_timeout': 3600}
+    'CELERY_IMPORTS': ("zzom.nmap_tasks",),
+    'BROKER_URL': 'redis://127.0.0.1:6379/0',
+    # 'CELERY_RESULT_BACKEND': 'db+mysql://root:toor@127.0.0.1:3306/glories',
+    'CELERY_RESULT_BACKEND': 'redis://127.0.0.1:6379/0',
+    'CELERY_TASK_SERIALIZER': 'json',
+    'CELERY_RESULT_SERIALIZER': 'json',
+    'CELERY_TIMEZONE': 'Asia/Shanghai',
+    'CELERY_ENABLE_UTC': True,
+    'CELERY_REDIS_MAX_CONNECTIONS': 5000,  # Redis 最大连接数
+    'CELERYD_POOL_RESTARTS': True,
+    'BROKER_TRANSPORT_OPTIONS': {'visibility_timeout': 3600}
 }
 
 DB_CONN_STRING = 'mysql+mysqldb://root:toor@127.0.0.1/glories'

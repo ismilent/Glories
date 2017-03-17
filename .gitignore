@@ -9,3 +9,12 @@ py3_env/
 *.rdb
 .vscode/
 tags
+.vscode/
+celerybeat-schedule
+config/__pycache__/
+services/sqlmap/lib/__pycache__/
+services/sqlmap/lib/utils/__pycache__/
+thirdparty/__pycache__/
+thirdparty/libnmap/
+utils/__pycache__/
+zzom/

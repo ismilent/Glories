@@ -9,9 +9,11 @@ from flask import make_response
 from flask import request
 
 import celery
-from tasks import nmap_dispath
-from tasks import celery_app
+# from tasks import nmap_dispath
+# from tasks import celery_app
 
+from zzom.nmap_tasks import nmap_dispath
+from zzom.celery import celery_app
 
 flask_app = Flask(__name__)
 
